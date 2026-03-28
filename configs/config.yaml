@@ -1,0 +1,56 @@
+# Workforce Planning Configuration
+
+# Data settings
+data:
+  synthetic:
+    n_quarters: 12
+    n_departments: 5
+    n_skills: 10
+    n_employees: 200
+    seed: 42
+
+# Model settings
+model:
+  optimization:
+    solver: "highs"  # highs, cbc, gurobi
+    time_limit: 300  # seconds
+    gap_tolerance: 0.01
+  
+  forecasting:
+    method: "exponential_smoothing"  # arima, exponential_smoothing, xgboost
+    horizon: 4  # quarters ahead
+    confidence_level: 0.95
+
+# Business constraints
+constraints:
+  max_hiring_per_quarter: 50
+  min_retention_rate: 0.85
+  max_overtime_hours: 20
+  skill_match_threshold: 0.8
+  budget_limit: 10000000
+
+# Evaluation metrics
+evaluation:
+  primary_metrics:
+    - "total_cost"
+    - "service_level"
+    - "utilization_rate"
+    - "skill_coverage"
+  
+  secondary_metrics:
+    - "hiring_efficiency"
+    - "retention_rate"
+    - "overtime_hours"
+    - "skill_gaps"
+
+# Visualization settings
+viz:
+  theme: "plotly_white"
+  color_palette: "viridis"
+  figure_size: [12, 8]
+  
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/workforce_planning.log"
